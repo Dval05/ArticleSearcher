@@ -128,7 +128,7 @@ export class App {
     this.error.set(null);
     this.results.set([]);
     const page = this.page();
-    const url = `http://localhost:3000/search?q=${encodeURIComponent(q)}&page=${page}&rows=${this.rowsPerPage}`;
+    const url = `/search?q=${encodeURIComponent(q)}&page=${page}&rows=${this.rowsPerPage}`;
     this.http.get<{ total: number; results: Array<{ index: number; title: string; publicationDate: string | null; doi: string | null }>; page: number; rows: number }>(url)
       .subscribe({
         next: (data) => {
