@@ -9,14 +9,15 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+const publicDir = path.join(__dirname, 'public');
+app.use(express.static(publicDir));
+
 app.get('/search', searchHandler);
 
-app.get('/', (_req, res) => {
+app.get('/api/status', (_req, res) => {
   res.json({ status: 'ok', service: 'ArticleSearcher backend' });
 });
 
-const publicDir = path.join(__dirname, 'public');
-app.use(express.static(publicDir));
 app.get('*', (_req, res) => {
   const indexPath = path.join(publicDir, 'index.html');
   res.sendFile(indexPath, (err) => {
